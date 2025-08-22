@@ -48,3 +48,17 @@ WHERE population >= 25000000
 - `WHERE population >= 25000000` filtra los países con una población de 25 millones o más.
 - `OR area >= 3000000` agrega además a los países cuya superficie es de 3 millones de km² o más, incluso si no cumplen el requisito de población.
 - Útil para identificar países que son relevantes por tamaño demográfico o geográfico, sin necesidad de que ambas condiciones se cumplan simultáneamente.
+
+## Ejemplo 4: Seleccionar autores que vieron su propio contenido
+```sql
+SELECT DISTINCT author_id AS id
+FROM views
+WHERE author_id = viewer_id
+ORDER BY id;
+```
+### Explicación: 
+- `SELECT DISTINCT author_id AS id` devuelve los identificadores únicos de autores, renombrando la columna como id.
+- `FROM views` indica que los datos se obtienen de la tabla views.
+- `WHERE author_id = viewer_id` filtra únicamente los registros donde el autor de un contenido es la misma persona que lo visualizó.
+- `ORDER BY id` ordena la lista final de identificadores en orden ascendente.
+- Útil para detectar casos en que los autores consultan o revisan su propio contenido, asegurando que cada autor aparezca solo una vez en el resultado.
