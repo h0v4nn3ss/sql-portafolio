@@ -62,3 +62,16 @@ ORDER BY id;
 - `WHERE author_id = viewer_id` filtra únicamente los registros donde el autor de un contenido es la misma persona que lo visualizó.
 - `ORDER BY id` ordena la lista final de identificadores en orden ascendente.
 - Útil para detectar casos en que los autores consultan o revisan su propio contenido, asegurando que cada autor aparezca solo una vez en el resultado.
+
+## Ejemplo 5: Seleccionar tweets con contenido largo
+```sql
+SELECT tweet_id
+FROM tweets
+WHERE LENGTH(content) > 15;
+```
+### Explicación: 
+- `SELECT tweet_id` devuelve únicamente el identificador de cada tweet.
+- `FROM tweets` indica que los datos se obtienen de la tabla tweets.
+- `WHERE LENGTH(content) > 15` filtra los registros para mostrar solo aquellos tweets cuyo campo content tenga una longitud superior a 15 caracteres.
+- La función `LENGTH()` mide el número de caracteres de la cadena de texto.
+- Útil para obtener un listado de publicaciones con contenido más sustancial, dejando fuera los tweets demasiado cortos.
