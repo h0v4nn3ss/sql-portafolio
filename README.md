@@ -81,6 +81,7 @@ LeetCode](https://leetcode.com/studyplan/top-sql-50/)**.
 Este recurso recopila problemas clásicos de SQL que permiten practicar
 desde lo más básico hasta consultas avanzadas, asegurando una cobertura
 amplia de funciones, operadores y estructuras comunes en bases de datos.
+
 ------------------------------------------------------------------------
 
 ## Autor
