@@ -1,34 +1,42 @@
 # 01 — Consultas Básicas con `SELECT`
+
 ## Objetivo
 
 Aprender a usar la sentencia SELECT para obtener datos de una tabla.
 Este capítulo cubre:
+
 - Selección de columnas específicas.
 - Filtrado de registros con WHERE.
 - Ordenamiento de resultados con ORDER BY.
 - Limitación de filas con LIMIT.
 
 ## Ejemplo 1: Seleccionar productos bajos en grasa y reciclables
+
 ```sql
 SELECT product_id
 FROM products
 WHERE low_fats = 'Y' 
     AND recyclable = 'Y';
 ```
-### Explicación:
+
+### Explicación del ejemplo 1
+
 - `SELECT product_id` devuelve únicamente el identificador de cada producto.
 - `FROM products` indica que los datos se extraen de la tabla products.
 - `WHERE low_fats = 'Y' AND recyclable = 'Y'` filtra solo los productos que cumplen ambas condiciones: ser bajos en grasa y reciclables.
 - Útil para obtener un listado de productos que combinan criterios de salud y sostenibilidad.
 
 ## Ejemplo 2: Seleccionar clientes que no fueron referidos por el cliente 2
+
 ```sql
 SELECT name
 FROM customer
 WHERE referee_id != 2 
     OR referee_id IS null;
 ```
-### Explicación:
+
+### Explicación del ejemplo 2
+
 - `SELECT name` devuelve solo la columna con el nombre de cada cliente.
 - `FROM customer` indica que los datos se obtienen de la tabla customer.
 - `WHERE referee_id != 2` filtra a todos los clientes cuyo referee_id (quien los refirió) no sea el cliente con id = 2.
@@ -36,13 +44,16 @@ WHERE referee_id != 2
 - Útil para obtener un listado de clientes que no dependen de un referido específico (el cliente 2), incluyendo los que llegaron por cuenta propia.
 
 ## Ejemplo 3: Seleccionar países con gran población o gran extensión territorial
+
 ```sql
 SELECT name, population, area
 FROM world
 WHERE population >= 25000000
     OR area >= 3000000;
 ```
-### Explicación:
+
+### Explicación del ejemplo 3
+
 - `SELECT name`, population, area devuelve tres columnas: el nombre del país, su población y su superficie.
 - `FROM world` indica que los datos se extraen de la tabla world.
 - `WHERE population >= 25000000` filtra los países con una población de 25 millones o más.
@@ -50,13 +61,16 @@ WHERE population >= 25000000
 - Útil para identificar países que son relevantes por tamaño demográfico o geográfico, sin necesidad de que ambas condiciones se cumplan simultáneamente.
 
 ## Ejemplo 4: Seleccionar autores que vieron su propio contenido
+
 ```sql
 SELECT DISTINCT author_id AS id
 FROM views
 WHERE author_id = viewer_id
 ORDER BY id;
 ```
-### Explicación: 
+
+### Explicación del ejemplo 4
+
 - `SELECT DISTINCT author_id AS id` devuelve los identificadores únicos de autores, renombrando la columna como id.
 - `FROM views` indica que los datos se obtienen de la tabla views.
 - `WHERE author_id = viewer_id` filtra únicamente los registros donde el autor de un contenido es la misma persona que lo visualizó.
@@ -64,12 +78,15 @@ ORDER BY id;
 - Útil para detectar casos en que los autores consultan o revisan su propio contenido, asegurando que cada autor aparezca solo una vez en el resultado.
 
 ## Ejemplo 5: Seleccionar tweets con contenido largo
+
 ```sql
 SELECT tweet_id
 FROM tweets
 WHERE LENGTH(content) > 15;
 ```
-### Explicación: 
+
+### Explicación del ejemplo 5
+
 - `SELECT tweet_id` devuelve únicamente el identificador de cada tweet.
 - `FROM tweets` indica que los datos se obtienen de la tabla tweets.
 - `WHERE LENGTH(content) > 15` filtra los registros para mostrar solo aquellos tweets cuyo campo content tenga una longitud superior a 15 caracteres.
