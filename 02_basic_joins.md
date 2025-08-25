@@ -30,7 +30,7 @@ ORDER BY e.name;
 
 ## Ejemplo 2: Obtener información de productos con sus ventas anuales
 
-```sql 
+```sql
 SELECT p.product_name, s.year, s.price
 FROM sales AS s
 JOIN product AS p
@@ -45,3 +45,24 @@ ORDER BY year;
 - `JOIN product AS p ON s.product_id = p.product_id` hace una unión interna (INNER JOIN) entre la tabla sales (s) y la tabla product (p). Esto significa que solo se mostrarán los registros que tengan coincidencias en ambas tablas, es decir, ventas que correspondan a productos existentes.
 - `ORDER BY year` ordena el resultado cronológicamente según el año de las ventas, mostrando primero las ventas más antiguas.
 
+## Ejemplo 3: Obtener clientes que visitaron pero no realizaron transacciones
+
+```sql
+SELECT  v.customer_id, 
+        COUNT(v.visit_id) AS count_no_trans 
+FROM visits AS v
+LEFT JOIN transactions AS t
+    ON v.visit_id = t.visit_id
+WHERE t.transaction_id IS NULL
+GROUP BY v.customer_id
+ORDER BY count_no_trans;
+```
+
+### Explicación del ejemplo 3
+
+- `SELECT v.customer_id, COUNT(v.visit_id) AS count_no_trans` indica que se devolverán dos columnas: el ID del cliente y el conteo de visitas sin transacciones, renombrado como "count_no_trans".
+- `FROM visits AS v` define que la tabla principal de la consulta es visits, y se le asigna el alias v para simplificar la escritura.
+- `LEFT JOIN transactions AS t ON v.visit_id = t.visit_id` hace una unión externa (LEFT JOIN) entre la tabla visits (v) y la tabla transactions (t). Esto asegura que todas las visitas aparezcan en el resultado, incluso si no tienen transacciones asociadas.
+- `WHERE t.transaction_id IS NULL` filtra únicamente las visitas que no tienen transacciones asociadas (donde el campo transaction_id es NULL).
+- `GROUP BY v.customer_id` agrupa los resultados por cliente para poder contar las visitas sin transacciones de cada uno.
+- `ORDER BY count_no_trans` ordena el resultado según el número de visitas sin transacciones, mostrando primero los clientes con menos visitas sin compras.
